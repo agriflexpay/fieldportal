@@ -83,6 +83,14 @@
 .logo {
   height: 1em;
 }
+.link {
+  color: rgb(251, 246, 246);
+  text-decoration: none;
+  user-select: none;
+}
+/* .link:hover::after {
+  content: 'home page';
+} */
 
 @media (max-width: 600px) {
   .grid {
