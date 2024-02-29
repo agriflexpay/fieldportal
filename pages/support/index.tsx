@@ -10,10 +10,8 @@ import Typography from '@mui/joy/Typography';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
-import Sidebar from '../components/Sidebar';
-import OrderTable from '../components/PaymentTable';
-import OrderList from '../components/OrderList';
-import Header from '../components/Header';
+import Sidebar from '../../components/Sidebar';
+import Header from '../../components/Header';
 export default function Home() {
   return (
     <CssVarsProvider disableTransitionOnChange>
@@ -64,7 +62,9 @@ export default function Home() {
               >
                 Dashboard
               </Link>
-              
+              <Typography color="primary" fontWeight={500} fontSize={12}>
+                Support
+              </Typography>
             </Breadcrumbs>
           </Box>
           <Box
@@ -79,18 +79,16 @@ export default function Home() {
             }}
           >
             <Typography level="h2" component="h1">
-              Orders
+              Support
             </Typography>
             <Button
               color="primary"
               startDecorator={<DownloadRoundedIcon />}
               size="sm"
             >
-              Download PDF
+              Get Support
             </Button>
           </Box>
-          <OrderTable />
-          <OrderList />
         </Box>
       </Box>
     </CssVarsProvider>

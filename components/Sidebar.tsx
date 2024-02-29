@@ -197,7 +197,7 @@ export default function Sidebar() {
                     <PetsIcon />
                     <ListItemContent>
                       <Link
-                      className={styles.link}
+                        className={styles.link}
                         href="/plans/myplans"
                       >
                         <Typography level="title-sm">My Plans</Typography>
@@ -245,7 +245,7 @@ export default function Sidebar() {
                     <ListItemContent>
                       <Link
                         className={styles.link}
-                        href="/payments"
+                        href="/payments/makepayment"
                       >
                         <Typography level="title-sm">Make Payment</Typography>
                       </Link>
@@ -275,7 +275,12 @@ export default function Sidebar() {
                   <ListItemButton >
                     <PaymentIcon />
                     <ListItemContent>
-                      <Typography level="title-sm">Flaged Diseases</Typography>
+                      <Link
+                        className={styles.link}
+                        href="/diseases/flag"
+                      >
+                        <Typography level="title-sm">Flaged Diseases</Typography>
+                      </Link>
                     </ListItemContent>
                   </ListItemButton>
                 </ListItem>
@@ -283,7 +288,12 @@ export default function Sidebar() {
                   <ListItemButton >
                     <PaymentIcon />
                     <ListItemContent>
-                      <Typography level="title-sm">Flag A Disease</Typography>
+                      <Link
+                        className={styles.link}
+                        href="/diseases/flagged"
+                      >
+                        <Typography level="title-sm">Flag A Disease</Typography>
+                      </Link>
                     </ListItemContent>
                   </ListItemButton>
                 </ListItem>
@@ -356,13 +366,23 @@ export default function Sidebar() {
           <ListItem>
             <ListItemButton>
               <SupportRoundedIcon />
-              Support
+              <Link
+                className={styles.link}
+                href="/support"
+              >
+                <Typography level="title-sm"> Support</Typography>
+              </Link>
             </ListItemButton>
           </ListItem>
           <ListItem>
             <ListItemButton>
               <SettingsRoundedIcon />
-              Settings
+              <Link
+                className={styles.link}
+                href="/settings"
+              >
+                <Typography level="title-sm">Settings</Typography>
+              </Link>
             </ListItemButton>
           </ListItem>
         </List>
