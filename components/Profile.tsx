@@ -171,7 +171,7 @@ export default function Plans() {
           display: 'flex',
           mb: 1,
           gap: 1,
-          flexDirection: { xs: 'column', sm: 'row', md: 'row' },
+          flexDirection: { xs: 'column', sm: 'row', md: 'row', lg: 'row'},
           alignItems: { xs: 'start', sm: 'center' },
           flexWrap: 'wrap',
           justifyContent: 'space-between',
@@ -179,131 +179,34 @@ export default function Plans() {
         }}>
 
 
-        <CardContent
+        <Card sx={{width: '40%'}}>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://t4.ftcdn.net/jpg/04/40/22/63/240_F_440226335_OYwRDsUW3KSXQqrv0HBtqkmeiPTgN9qc.jpg"
+            alt="visa card"
+          />
+          <CardContent>
+            <Typography gutterBottom  component="div">
+              Lizard
+            </Typography>
+            <Typography >
+              Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+              across all continents except Antarctica
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card
           sx={{
             display: 'flex',
             flexDirection: 'column',
             gap: 1,
-            width: 'auto'
+            width: `50%`,
+            height: "fill"
           }}
         >
-          <Stack direction="row" spacing={2}>
-            <Avatar sx={{ bgcolor: deepOrange[500] }} >
-              N
-            </Avatar>
-            <Avatar sx={{ bgcolor: green[500] }} >
-              <AssignmentIcon />
-            </Avatar>
 
-          </Stack>
-          </CardContent>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 1,
-              width: `${isMobile ? "100%" : "50"}`,
-              height: "fill"
-            }}
-          >
-            <Card
-              invertedColors
-              variant="soft"
-              size="sm"
-              sx={{ boxShadow: 'small' }}
-            >
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Typography level="title-lg">Billing Information</Typography>
-                <AccountBalanceWalletOutlinedIcon />
-              </Stack>
-              <Box
-                sx={{
-                  display: 'flex',
-                  mb: 1,
-                  gap: 1,
-                  flexDirection: { xs: 'column', sm: 'row' },
-                  alignItems: { xs: 'start', sm: 'center' },
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-between',
-                }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 1,
-                  }}
-                >
-                  <Typography level="body-md">Card Number</Typography>
-                  <Input size="sm" type="number" startDecorator={<AddCardOutlinedIcon />} />
-                </Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 1,
-                  }}
-                >
-                  <Typography level="body-md">Expiration Date</Typography>
-                  <Input size="sm" type="date" />
-                </Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 1,
-                  }}
-                >
-                  <Typography level="body-md">CVV</Typography>
-                  <Input size="sm" type="number" startDecorator={<PriorityHighOutlinedIcon />} />
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  mb: 1,
-                  gap: 1,
-                  flexDirection: { xs: 'column', sm: 'row' },
-                  alignItems: { xs: 'start', sm: 'center' },
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-between',
-                }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 1,
-                  }}
-                >
-                  <Typography level="body-md">Card Holder's Name</Typography>
-                  <Input size="sm" type="number" startDecorator={<ContactPhoneOutlinedIcon />} />
-                </Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 1,
-                  }}
-                >
-                  <Typography level="body-md">Mpesa Number</Typography>
-                  <Input size="sm" type="number" startDecorator={<ContactPhoneOutlinedIcon />} />
-                </Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 1,
-                  }}
-                >
-                  <Typography level="body-sm">.</Typography>
-                  <Button
-                    color="neutral"
-                    startDecorator={<CloudUploadOutlinedIcon />}
-                    size="sm"
-                  >Update</Button>
-                </Box>
-              </Box>
-            </Card>
-          </Box>
+        </Card>
       </Card>
     </Card>
   );

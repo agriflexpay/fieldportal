@@ -1,96 +1,68 @@
-import * as React from 'react';
-import { CssVarsProvider } from '@mui/joy/styles';
-import CssBaseline from '@mui/joy/CssBaseline';
-import Box from '@mui/joy/Box';
-import Button from '@mui/joy/Button';
-import Breadcrumbs from '@mui/joy/Breadcrumbs';
-import Link from '@mui/joy/Link';
-import Typography from '@mui/joy/Typography';
-
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
-import Sidebar from '../components/Sidebar';
-import OrderTable from '../components/PaymentTable';
-import OrderList from '../components/OrderList';
-import Header from '../components/Header';
-export default function Home() {
+import * as React from "react";
+import { CssVarsProvider, VariantProp } from "@mui/joy/styles";
+import CssBaseline from "@mui/joy/CssBaseline";
+import Box from "@mui/joy/Box";
+import LinearProgress from "@mui/joy/LinearProgress";
+import { signIn,useSession } from "next-auth/react";
+import Stack from "@mui/joy/Stack";
+import { useRouter } from "next/router";
+export default function Redirect() {
+  const { data: session } = useSession();
+  const router = useRouter()
+  const user :any =session?.user
+  console.log(user)
+ 
   return (
     <CssVarsProvider disableTransitionOnChange>
       <CssBaseline />
-      <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
-        <Header />
-        <Sidebar />
+      <Box sx={{ display: "flex", minHeight: "100dvh" }}>
         <Box
           component="main"
           className="MainContent"
           sx={{
             px: { xs: 2, md: 6 },
             pt: {
-              xs: 'calc(12px + var(--Header-height))',
-              sm: 'calc(12px + var(--Header-height))',
+              xs: "calc(12px + var(--Header-height))",
+              sm: "calc(12px + var(--Header-height))",
               md: 3,
             },
             pb: { xs: 2, sm: 2, md: 3 },
             flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "row",
             minWidth: 0,
-            height: '100dvh',
+            height: "100dvh",
             gap: 1,
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Breadcrumbs
-              size="sm"
-              aria-label="breadcrumbs"
-              separator={<ChevronRightRoundedIcon  />}
-              sx={{ pl: 0 }}
-            >
-              <Link
-                underline="none"
-                color="neutral"
-                href="#some-link"
-                aria-label="Home"
-              >
-                <HomeRoundedIcon />
-              </Link>
-              <Link
-                underline="hover"
-                color="neutral"
-                href="#some-link"
-                fontSize={12}
-                fontWeight={500}
-              >
-                Dashboard
-              </Link>
-              
-            </Breadcrumbs>
-          </Box>
           <Box
             sx={{
-              display: 'flex',
+              display: "flex",
               mb: 1,
               gap: 1,
-              flexDirection: { xs: 'column', sm: 'row' },
-              alignItems: { xs: 'start', sm: 'center' },
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              alignItems: "center",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              gap: 3,
             }}
           >
-            <Typography level="h2" component="h1">
-              Orders
-            </Typography>
-            <Button
-              color="primary"
-              startDecorator={<DownloadRoundedIcon />}
-              size="sm"
-            >
-              Download PDF
-            </Button>
+            <Stack spacing={2} sx={{ flex: 1 }}>
+              <LinearProgress
+                color="primary"
+                variant="plain"
+                size="sm"
+                thickness={1}
+              />
+            </Stack>
           </Box>
-          <OrderTable />
-          <OrderList />
         </Box>
       </Box>
     </CssVarsProvider>
