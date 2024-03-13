@@ -37,6 +37,8 @@ import { closeSidebar } from "../utils";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import { useSession } from "next-auth/react";
+import{ handleSignOut}  from "../lib/authApiRoutes"
 function Toggler({
   defaultExpanded = false,
   renderToggle,
@@ -70,6 +72,10 @@ function Toggler({
 }
 
 export default function Sidebar() {
+  const { data: session } = useSession();
+  const data :any =session?.user
+  const user = data?.user
+  const Agency = data?.user?.Agency
   return (
     <Sheet
       className="Sidebar"
@@ -126,7 +132,7 @@ export default function Sidebar() {
         <IconButton variant="soft" color="primary" size="sm">
           <BrightnessAutoRoundedIcon />
         </IconButton>
-        <Typography level="title-lg">Agriflex Pay</Typography>
+        <Typography level="title-lg">{Agency?.name}</Typography>
         <ColorSchemeToggle sx={{ ml: "auto" }} />
       </Box>
       <Input
@@ -396,13 +402,13 @@ export default function Sidebar() {
           src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
         />
         <Box sx={{ minWidth: 0, flex: 1 }}>
-          <Typography level="title-sm">Siriwat K.</Typography>
-          <Typography level="body-xs">siriwatk@test.com</Typography>
+          <Typography level="title-sm">{`${user?.fname} ${user?.lname}`}</Typography>
+          <Typography level="body-xs">{user?.email}</Typography>
         </Box>
-        <IconButton size="sm" variant="plain" color="neutral">
-          <Link className={styles.link} href="/auth/signin">
-            <LogoutRoundedIcon />
-          </Link>
+        <IconButton size="sm" variant="plain" color="neutral" onClick={handleSignOut}>
+         
+            <LogoutRoundedIcon/>
+     
         </IconButton>
       </Box>
     </Sheet>

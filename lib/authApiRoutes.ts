@@ -28,11 +28,10 @@ export const handleSignIn = async (data:any) => {
     const response = await signIn("credentials", {
         email: email,
         password: password,
-        redirect:true,
+        redirect:false,
         callbackUrl:'/home'
     });
     return response;
-
 };
 
 export const handleSignOut = () => {

@@ -3,15 +3,29 @@ import { CssVarsProvider, VariantProp } from "@mui/joy/styles";
 import CssBaseline from "@mui/joy/CssBaseline";
 import Box from "@mui/joy/Box";
 import LinearProgress from "@mui/joy/LinearProgress";
-import { signIn,useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Stack from "@mui/joy/Stack";
 import { useRouter } from "next/router";
-export default function Redirect() {
-  const { data: session } = useSession();
-  const router = useRouter()
-  const user :any =session?.user
-  console.log(user)
  
+export default function Redirect() {
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  React.useEffect(() => {
+    const isloggedin = async () => {
+      const id = await (() => {
+        const data: any = session?.user;
+        const id = data?.user?.id;
+        return id;
+      })();
+      if (!id) {
+        signIn();
+      } else {
+        router.push("/home");
+      }
+    };
+    isloggedin();
+  });
   return (
     <CssVarsProvider disableTransitionOnChange>
       <CssBaseline />

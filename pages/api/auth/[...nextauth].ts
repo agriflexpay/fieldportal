@@ -2,7 +2,8 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyCredentials } from "../../../lib/authApiRoutes";
 import { NextApiRequest, NextApiResponse } from "next";
-import { useRouter } from "next/router";
+
+
 const options = {
     providers:[
         CredentialsProvider({

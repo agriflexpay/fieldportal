@@ -6,13 +6,11 @@ import Button from '@mui/joy/Button';
 import Breadcrumbs from '@mui/joy/Breadcrumbs';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
-
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
-
 export default function Home() {
   return (
     <CssVarsProvider disableTransitionOnChange>

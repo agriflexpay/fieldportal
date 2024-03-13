@@ -31,7 +31,12 @@ export default function SignInSide() {
       email:values.email,
       password:values.password
     }
-    handleSignIn(data)
+    handleSignIn(data).then((response: any) => {
+      if(response?.error==='CredentialsSignin'){
+        setError("Invalid Email Or Password")
+      }
+      response.ok && router.push("/");
+    })
   };
   const initialValues = {
     email: "",
@@ -130,6 +135,7 @@ export default function SignInSide() {
                       error={Boolean(touched.password && errors.password)}
                     />
                     <FormControlLabel
+                    disabled
                       control={<Checkbox value="remember" color="primary" />}
                       label="Remember me"
                     />
