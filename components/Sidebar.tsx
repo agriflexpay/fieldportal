@@ -399,7 +399,7 @@ export default function Sidebar() {
         <Avatar
           variant="outlined"
           size="sm"
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
+          src="https://source.unsplash.com/64x64/?portrait"
         />
         <Box sx={{ minWidth: 0, flex: 1 }}>
           <Typography level="title-sm">{`${user?.fname} ${user?.lname}`}</Typography>

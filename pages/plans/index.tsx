@@ -6,7 +6,6 @@ import Button from '@mui/joy/Button';
 import Breadcrumbs from '@mui/joy/Breadcrumbs';
 import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
-
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
@@ -15,7 +14,11 @@ import OrderTable from '../../components/PaymentTable';
 import OrderList from '../../components/OrderList';
 import Header from '../../components/Header';
 import PlansTable from '../../components/PlansTable';
+import {getPlans} from '../api/plans';
 
+const plans = async () => {
+  
+}
 export default function Home() {
 
 
@@ -89,7 +92,7 @@ export default function Home() {
             </Typography>
           </Box>
           <PlansTable />
-          <OrderList />
+        
         </Box>
       </Box>
     </CssVarsProvider>

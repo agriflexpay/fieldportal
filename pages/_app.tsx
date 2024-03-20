@@ -3,17 +3,21 @@ import { ReactElement, ReactNode, Suspense } from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import { SessionProvider } from 'next-auth/react';
-
+import {
+    QueryClient,
+    QueryClientProvider,
+  } from  "react-query"
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: ReactElement) => ReactNode;
 };
 type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout;
 };
-
+const queryClient = new QueryClient()
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     return (
         <SessionProvider session={pageProps.session}>
+             <QueryClientProvider client={queryClient}>
                 <Head>
                     <title>AGRIFLEXPAY</title>
                     <meta charSet="UTF-8" />
@@ -25,6 +29,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
                 <Suspense fallback="loading">
                     {Component.getLayout ? Component.getLayout(<Component {...pageProps} />) : <Component {...pageProps} />}
                 </Suspense>
+                </QueryClientProvider>
         </SessionProvider>
     );
 };

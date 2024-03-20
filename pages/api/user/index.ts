@@ -20,8 +20,8 @@ export const signInUser = async ({ email, password }) => {
     return response;
 }
 
-export const registerUser = async ({ data,authtoken }) => {
-    const response = await userApi.post(`${userUrlEndpoint}/register`, data,{headers:{'Content-Type': 'application/json','x-access-token':authtoken}});
+export const registerUser = async ({ data}) => {
+    const response = await userApi.post(`${userUrlEndpoint}/register`, data);
     return response.data.data;
 }
 
