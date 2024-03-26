@@ -11,8 +11,8 @@ import FormLabel from "@mui/joy/FormLabel";
 import Link from "@mui/joy/Link";
 import Input from "@mui/joy/Input";
 import Modal from "@mui/joy/Modal";
-import ModalDialog from "@mui/joy/ModalDialog";
 import ModalClose from "@mui/joy/ModalClose";
+import ModalDialog from "@mui/joy/ModalDialog";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import Table from "@mui/joy/Table";
@@ -35,7 +35,14 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 import { getPlans } from "../pages/api/plans";
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import AspectRatio from "@mui/joy/AspectRatio";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import BookmarkAdd from "@mui/icons-material/BookmarkAddOutlined";
+import CircularProgress from "@mui/joy/CircularProgress";
+import SvgIcon from "@mui/joy/SvgIcon";
+import CardCover from "@mui/joy/CardCover";
 import {
   useQuery,
   useMutation,
@@ -43,6 +50,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "react-query";
+import CardOverflow from "@mui/joy/CardOverflow/CardOverflow";
 const _fetchPlans = async (id: any, authtoken: any) => {
   const response = await getPlans({ id, authtoken });
   return response;
@@ -90,8 +98,16 @@ function stableSort<T>(
   });
   return stabilizedThis.map((el) => el[0]);
 }
+function formatDate(dateString: any) {
+  const options = { year: "numeric", month: "long", day: "2-digit" };
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US");
+}
 
-function RowMenu() {
+function RowMenu(setOpenApplyModal: {
+  (value: React.SetStateAction<boolean>): void;
+  (arg0: boolean): void;
+},inspectPlan: any) {
   return (
     <Dropdown>
       <MenuButton
@@ -101,9 +117,13 @@ function RowMenu() {
         <VisibilityOutlinedIcon /> View
       </MenuButton>
       <Menu size="sm" sx={{ minWidth: 140 }}>
-        <MenuItem color="primary">Apply</MenuItem>
-        <MenuItem  color="success">Book</MenuItem>
-        <MenuItem>Inspect</MenuItem>
+        <MenuItem color="primary">
+          <Link onClick={() => setOpenApplyModal(true)}>Apply</Link>
+        </MenuItem>
+        <MenuItem color="success">Book</MenuItem>
+        <MenuItem>
+        <Link onClick={() => inspectPlan(true)}>Inspect</Link>
+        </MenuItem>
         {/* <Divider /> */}
         {/* <MenuItem color="danger">Delete</MenuItem> */}
       </Menu>
@@ -111,6 +131,140 @@ function RowMenu() {
   );
 }
 
+function ApplyModal(
+  openApplyModal: boolean,
+  setOpenApplyModal: (arg0: boolean) => void,
+  data: any
+) 
+{
+  const layout = "center";
+  function handleLayoutChange(event: React.ChangeEvent<HTMLInputElement>) {
+    layout === "center" ? "bottom" : "center";
+  }
+  return (
+    <React.Fragment>
+      <Modal
+        aria-labelledby="close-modal-title"
+        open={openApplyModal}
+        onClose={(_event: React.MouseEvent<HTMLButtonElement>) => {
+          setOpenApplyModal(false);
+        }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        
+        <Sheet
+          variant="soft"
+          sx={{
+            minWidth: 300,
+            borderRadius: "md",
+            p: 0,
+          }}
+        >
+          <Card
+            sx={{ width: 320 }}
+            variant="soft"
+            color="primary"
+            invertedColors
+          >
+            <div>
+              <Typography level="title-lg">{data?.name}</Typography>
+              <Typography level="body-sm">{data?.createdAt}</Typography>
+              <IconButton
+                aria-label="bookmark Bahamas Islands"
+                variant="plain"
+                color="neutral"
+                size="sm"
+                sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
+              >
+                <BookmarkAdd />
+              </IconButton>
+            </div>
+            <AspectRatio minHeight="120px" maxHeight="200px">
+              <img
+                src="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286"
+                srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
+                loading="lazy"
+                alt=""
+              />
+            </AspectRatio>
+            <CardCover
+              sx={{
+                background:
+                  "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
+              }}
+            />
+            <CardContent orientation="horizontal">
+              {/* <div>
+                <Typography level="body-xs">Total price:</Typography>
+                <Typography fontSize="lg"  level="h2" fontWeight="lg">
+                  {data?.total_amount.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "Ksh",
+                  })}
+                </Typography>
+              </div> */}
+              {/* <Button
+                variant="solid"
+                size="md"
+                color="primary"
+                aria-label="Explore Bahamas Islands"
+                sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+              >
+                Explore
+              </Button> */}
+              <CircularProgress size="lg" determinate value={20}>
+                <SvgIcon>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
+                    />
+                  </svg>
+                </SvgIcon>
+              </CircularProgress>
+              <CardContent>
+                <Typography level="body-sm" textColor="primary.400">
+                  Total price:
+                </Typography>
+                <Typography fontSize="lg" level="h2" fontWeight="lg">
+                  {data?.total_amount.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "Ksh",
+                  })}
+                </Typography>
+              </CardContent>
+            </CardContent>
+            <CardOverflow variant="soft">
+              <Divider inset="context" />
+              <CardContent orientation="horizontal">
+                <Typography level="body-xs">6.3k views</Typography>
+                <Divider orientation="vertical" />
+                <Button variant="outlined" color="neutral">
+                  Inspect
+                </Button>
+                <Divider orientation="vertical" />
+                <Button variant="outlined" color="neutral">
+                  Apply
+                </Button>
+              </CardContent>
+            </CardOverflow>
+          </Card>
+        </Sheet>
+      </Modal>
+    </React.Fragment>
+  );
+}
 export default function PlansTable() {
   const [order, setOrder] = React.useState<Order>("desc");
   const [selected, setSelected] = React.useState<readonly any[]>([]);
@@ -120,14 +274,18 @@ export default function PlansTable() {
   const _data: any = session?.user;
   const sessionData: any = session;
   const authtoken = sessionData?.authToken;
-
+  const [openApplyModal, setOpenApplyModal] = React.useState(false);
   const Agency = _data?.user?.Agency;
+  const [inspectPlan, setInspectPlan] = React.useState(false);
   const { refetch: data } = useQuery(
     ["fetchPlansByAgency", Agency?.id],
     () => _fetchPlans(Agency?.id, authtoken),
     {
       onSuccess: (data: any) => {
         setPlans(data);
+      },
+      onError: (error) => {
+        console.log(error);
       },
     }
   );
@@ -139,6 +297,9 @@ export default function PlansTable() {
       duration: plan?.KukuPlan?.duration,
       total_amount: plan?.KukuPlan?.amount,
       interest_rate: `${plan?.KukuPlan?.interest_rate} % p.a`,
+      KukuPlan: plan?.KukuPlan,
+      Agency: plan?.Agency,
+      createdAt: formatDate(plan?.createdAt),
     };
   });
 
@@ -181,6 +342,7 @@ export default function PlansTable() {
       </FormControl>
     </React.Fragment>
   );
+
   return (
     <React.Fragment>
       <Sheet
@@ -340,7 +502,7 @@ export default function PlansTable() {
                     sx={{ verticalAlign: "text-bottom" }}
                   />
                 </td>
-                <td >
+                <td>
                   <Typography level="body-xs">{row.name}</Typography>
                 </td>
                 <td>
@@ -357,7 +519,9 @@ export default function PlansTable() {
                     {/* <Link level="body-xs" component="button">
                       Apply
                     </Link> */}
-                    {RowMenu()}
+                    {ApplyModal(openApplyModal, setOpenApplyModal, row)}
+                    {RowMenu(setOpenApplyModal, setInspectPlan)}
+                    
                   </Box>
                 </td>
               </tr>
